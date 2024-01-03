@@ -7,6 +7,10 @@
         <classes>
             <class name="LoginTests"/>
             <class name="BaseTest"/>
+            <class name="LessonSixteen"/>
+            <class name="MyLogin"/>
+            <class name="MyLogin2"/>
+            <class name="Homework16"/>
         </classes>
     </test>
 </suite>
