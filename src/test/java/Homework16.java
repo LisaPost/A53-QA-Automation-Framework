@@ -27,6 +27,5 @@ public class Homework16 extends BaseTest {
         Assert.assertEquals(driver.getCurrentUrl(), url2);
 
         driver.quit();
-
     }
 }
