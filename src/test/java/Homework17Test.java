@@ -2,7 +2,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-public class Homework17 extends BaseTest {
+public class Homework17Test extends BaseTest {
     @Test
     public void addNewSong() throws InterruptedException {
         try {
@@ -19,7 +19,7 @@ public class Homework17 extends BaseTest {
             WebElement alertShow = driver.findElement(By.xpath("//div[class='success show']"));
             Assert.assertEquals(alertShow.getText(), "Added 1 song into \""+listName+"\".");
             deletePlaylist("Brand New Playlist");
-        } catch (Exception e) {
+        } catch (InterruptedException e) {
             System.out.println("Oops, here is an error: " + e);
         }
 
