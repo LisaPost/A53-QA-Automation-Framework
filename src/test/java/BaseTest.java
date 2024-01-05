@@ -61,10 +61,10 @@ public class BaseTest {
         WebElement tapAddAllButton = driver.findElement(By.cssSelector("button[class='btn-add-to']"));
         tapAddAllButton.click();
 
-      //WebElement selectExistingPlaylist = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//li[contains(@class,'playlist') and contains(text(),'Lisa')]"));
-     // selectExistingPlaylist.click();
+      WebElement selectExistingPlaylist = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//li[contains(@class,'playlist') and contains(text(),'Lisa')]"));
+      selectExistingPlaylist.click();
     }
-    public void createNewPlaylist(String listName) {
+    /*public void createNewPlaylist(String listName) {
         WebElement newPlaylist = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//input[@type='text']"));
         newPlaylist.sendKeys(listName);
         WebElement savePlaylist = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//button[@type='submit']"));
@@ -78,7 +78,7 @@ public class BaseTest {
         deletePlaylist.click();
         WebElement deleteSubmit = driver.findElement(By.xpath("//div[@class='dialog']//button[@class='ok']"));
         deleteSubmit.click();
-    }
+    }*/
     @AfterMethod
     public void closeBrowser() {
         driver.quit();

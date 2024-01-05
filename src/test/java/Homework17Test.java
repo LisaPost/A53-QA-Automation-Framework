@@ -14,11 +14,11 @@ public class Homework17Test extends BaseTest {
             viewAll();
             selectFirstItem();
             addSelectedSong();
-            createNewPlaylist("Brand New Playlist");
+            //createNewPlaylist("Brand New Playlist");
             Thread.sleep(1000);
-            WebElement alertShow = driver.findElement(By.xpath("//div[class='success show']"));
-            Assert.assertEquals(alertShow.getText(), "Added 1 song into \""+listName+"\".");
-            deletePlaylist("Brand New Playlist");
+            WebElement alertShow = driver.findElement(By.cssSelector("div.success.show"));
+            Assert.assertEquals(alertShow.getText(), "Added 1 song into \"Lisa.\"");
+            //deletePlaylist("Brand New Playlist");
         } catch (InterruptedException e) {
             System.out.println("Oops, here is an error: " + e);
         }
