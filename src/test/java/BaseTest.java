@@ -5,22 +5,22 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
 import java.time.Duration;
 
 public class BaseTest {
-    String url;
     WebDriver driver;
+    WebDriverWait wait;
     @DataProvider(name="LoginAndPlaylistExample")
     public Object[][] getDataFromDataProviders() {
         return new Object[][] {
-                {"yelyzaveta.postnova@testpro.io", "YrkeNi92", "Playlist1"},
-                {"demo@class.com", "te$t$tudent", "Playlist1"}
+                {"yelyzaveta.postnova@testpro.io", "YrkeNi92", "New Playlist"},
+                {"demo@class.com", "te$t$tudent", "New Playlist"}
         };
     }
-
-
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
@@ -32,37 +32,37 @@ public class BaseTest {
         options.addArguments("--remote-allow-origins=*");
 
         driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().window().maximize();
-        url = BaseUrl;
         driver.get(BaseUrl);
     }
     public void provideEmail(String username) {
-        WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
+        WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='email']")));
         emailField.clear();
         emailField.sendKeys(username);
     }
     public void providePassword(String password) {
-        WebElement passwordField = driver.findElement(By.cssSelector("input[type='password']"));
+        WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='password']")));
         passwordField.clear();
         passwordField.sendKeys(password);
     }
     public void login() {
-        WebElement submit = driver.findElement(By.cssSelector("button[type='submit']"));
-        submit.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[type='submit']"))).click();
     }
     public void createPlaylist(String playlistName) {
-        WebElement createNewPlaylist = driver.findElement(By.xpath("//i[@data-testid='sidebar-create-playlist-btn']"));
-        createNewPlaylist.click();
-        WebElement createSimplePlaylist = driver.findElement(By.xpath("//li[@data-testid='playlist-context-menu-create-simple']"));
-        createSimplePlaylist.click();
-        WebElement typePlaylistName = driver.findElement(By.xpath("//section[@id='playlists']//input[@type='text']"));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@data-testid='sidebar-create-playlist-btn']"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@data-testid='playlist-context-menu-create-simple']"))).click();
+        WebElement typePlaylistName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@id='playlists']//input[@type='text']")));
         typePlaylistName.sendKeys(playlistName);
         typePlaylistName.sendKeys(Keys.ENTER);
     }
     public void selectPlaylist() {
-        WebElement playlist = driver.findElement(By.xpath("//section[@id='playlists']//a[contains(text(),'Playlist1')]"));
-        playlist.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@id='playlists']//a[contains(text(),'New Playlist')]"))).click();
+    }
+    public String getPlaylistDeletedMsg() {
+        WebElement deletedPlaylistMsg = wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.cssSelector("div.success.show")));
+        return deletedPlaylistMsg.getText();
     }
     @AfterMethod
     public void closeBrowser() {
