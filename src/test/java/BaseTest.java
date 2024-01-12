@@ -57,11 +57,12 @@ public class BaseTest {
         typePlaylistName.sendKeys(Keys.ENTER);
     }
     public void selectPlaylist() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@id='playlists']//a[contains(text(),'New Playlist')]"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.xpath("//section[@id='playlists']//a[contains(text(),'New Playlist')]"))).click();
     }
     public String getPlaylistDeletedMsg() {
-        WebElement deletedPlaylistMsg = wait.until(ExpectedConditions.visibilityOfElementLocated
-                (By.cssSelector("div.success.show")));
+        WebElement parentElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
+        WebElement deletedPlaylistMsg = parentElement.findElement(By.xpath("//div[contains(text(),'Deleted playlist \"New Playlist.\"')]"));
         return deletedPlaylistMsg.getText();
     }
     @AfterMethod
