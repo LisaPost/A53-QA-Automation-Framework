@@ -1,25 +1,26 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
-
+//@Parameters({"BaseUrl"})
 public class LoginTests extends BaseTest {
-    @Test
-    public void loginEmptyEmailPassword() {
+    @Test(dataProvider = "LoginPositiveTest", dataProviderClass = BaseTest.class)
+    public void loginValid(String username, String password) {
+        provideEmail(username);
+        providePassword(password);
+        login();
 
-//      Added ChromeOptions argument below to fix websocket error
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-        String url = "https://qa.koel.app/";
-        driver.get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
+        WebElement avatar = wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.xpath("//a[@data-testid='view-profile-link']")));
+        Assert.assertTrue(avatar.isDisplayed());
+    }
+    @Test(dataProvider = "LoginNegativeTests", dataProviderClass = BaseTest.class)
+    public void loginInvalid(String username, String password, String BaseUrl) {
+        provideEmail(username);
+        providePassword(password);
+        login();
+        Assert.assertEquals(driver.getCurrentUrl(), BaseUrl);
     }
 }

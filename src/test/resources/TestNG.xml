@@ -3,10 +3,18 @@
 
 <suite name="TestNG">
 
+    <parameter name="BaseUrl" value="https://qa.koel.app/"/>
+    <parameter name="PlaylistName" value="New Playlist"/>
+    <parameter name="SongName" value="take my hand"/>
     <test name="Example Test" preserve-order="false">
         <classes>
-            <class name="LoginTests"/>
             <class name="BaseTest"/>
+            <class name="RegistrationTests"/>
+            <class name="LoginTests"/>
+            <class name="AddPlaylistTests"/>
+            <class name="AddSongToPlaylistTests"/>
+            <class name="PlaySongTests"/>
+            <class name="DeletePlaylistTests"/>
         </classes>
     </test>
 </suite>
