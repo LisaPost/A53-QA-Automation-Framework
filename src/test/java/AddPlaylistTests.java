@@ -12,4 +12,16 @@ public class AddPlaylistTests extends BaseTest {
         createPlaylist(playlistName);
         Assert.assertEquals(getPlaylistCreatedMsg(), expectedPlaylistCreatedMsg);
     }
+
+    @Test(dataProvider = "RenamePlaylistPositiveTest", dataProviderClass = BaseTest.class)
+    public void renamePlaylist(String username, String password, String playlistName, String newPlaylistName) {
+        String expectedPlaylistUpdatedMsg = "Updated playlist \"" + newPlaylistName + ".\"";
+        loginToApp(username, password);
+        createPlaylist(playlistName);
+        selectPlaylist();
+        contextClickOnSelectedPlaylist();
+        selectEditPlaylistOption();
+        editPlaylist(newPlaylistName);
+        Assert.assertEquals(getPlaylistUpdatedMsg(), expectedPlaylistUpdatedMsg);
+    }
 }

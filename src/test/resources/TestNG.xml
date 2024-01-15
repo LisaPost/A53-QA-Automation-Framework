@@ -11,6 +11,7 @@
             <class name="BaseTest"/>
             <class name="RegistrationTests"/>
             <class name="LoginTests"/>
+            <class name="HomePageTests"/>
             <class name="AddPlaylistTests"/>
             <class name="AddSongToPlaylistTests"/>
             <class name="PlaySongTests"/>

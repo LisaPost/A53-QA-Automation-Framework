@@ -9,10 +9,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 import java.time.Duration;
+import java.util.List;
 
 public class BaseTest {
     ChromeDriver driver;
     WebDriverWait wait;
+    public Actions actions;
 
     @DataProvider(name = "LoginPositiveTest")
     public Object[][] getDataForPositiveLogin() {
@@ -39,6 +41,13 @@ public class BaseTest {
         };
     }
 
+    @DataProvider(name = "RenamePlaylistPositiveTest")
+    public Object[][] getDataForRenamePlaylist() {
+        return new Object[][]{
+                {"yelyzaveta.postnova@testpro.io", "YrkeNi92", "New Playlist", "Renamed Playlist"}
+        };
+    }
+
     @DataProvider(name = "AddSongPositiveTest")
     public Object[][] getDataForAddSong() {
         return new Object[][]{
@@ -58,9 +67,11 @@ public class BaseTest {
         options.addArguments("--remote-allow-origins=*");
 
         driver = new ChromeDriver(options);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
 
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        actions = new Actions(driver);
         driver.get(BaseUrl);
     }
 
@@ -86,6 +97,12 @@ public class BaseTest {
     public void login() {
         wait.until(ExpectedConditions.visibilityOfElementLocated
                 (By.cssSelector("button[type='submit']"))).click();
+    }
+
+    public void loginToApp(String username, String password) {
+        provideEmail(username);
+        providePassword(password);
+        login();
     }
 
     public void createPlaylist(String playlistName) {
@@ -138,6 +155,7 @@ public class BaseTest {
                 (By.cssSelector("div.success.show")));
         return songAddedMsg.getText();
     }
+
     public void playNextSong() {
         Actions actions = new Actions(driver);
         WebElement playButton = driver.findElement(By.cssSelector("span .play i"));
@@ -148,13 +166,87 @@ public class BaseTest {
         wait.until(ExpectedConditions.visibilityOfElementLocated
                 (By.xpath("//i[@data-testid='play-next-btn']"))).click();
     }
+
     public void selectPlaylist() {
         wait.until(ExpectedConditions.visibilityOfElementLocated
                 (By.xpath("//section[@id='playlists']//a[contains(text(),'New Playlist')]"))).click();
     }
+
     public String getPlaylistDeletedMsg() {
         WebElement deletedPlaylistMsg = wait.until(ExpectedConditions.visibilityOfElementLocated
                 (By.cssSelector("div.success.show")));
         return deletedPlaylistMsg.getText();
+    }
+
+    public void selectAllSongsList() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.xpath("//a[@href='#!/songs']"))).click();
+    }
+
+    public void contextClickFirstSong() {
+        WebElement firstSongOnList = wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.xpath("//div[@class='song-list-wrap main-scroll-wrap all-songs']//table[@class='items']/tr[1]")));
+        actions.contextClick(firstSongOnList).perform();
+    }
+
+    public void selectPlayOption() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.xpath("//li[@class='playback']/span[text()='Play']"))).click();
+    }
+
+    public boolean isSongPlaying() {
+        WebElement soundBarVisualizer = wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.xpath("//img[@alt='Sound bars']")));
+        return soundBarVisualizer.isDisplayed();
+    }
+
+    public WebElement hoverPlay() {
+        WebElement playBtn = driver.findElement(By.xpath("//span[@data-testid='play-btn']"));
+        actions.moveToElement(playBtn).perform();
+        return wait.until(ExpectedConditions.visibilityOf(playBtn));
+    }
+
+    public void selectPlaylistByName() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@href='#!/favorites']"))).click();
+    }
+
+    public int countSongs() {
+        return driver.findElements(By.xpath("//section[@id='favoritesWrapper']//td[@class='title']")).size();
+    }
+
+    public String getPlaylistDetails() {
+        return driver.findElement(By.xpath("//span[@class='meta text-secondary']//span[@class='meta']")).getText();
+    }
+
+    public void displayAllSongs() {
+        List<WebElement> songList = driver.findElements(By.xpath("//section[@id='favoritesWrapper']//td[@class='title']"));
+        System.out.println("Number of songs found: " + countSongs());
+        for (WebElement e : songList) {
+            System.out.println(e.getText());
+        }
+    }
+
+    public void contextClickOnSelectedPlaylist() {
+        WebElement selectedPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.xpath("//section[@id='playlists']//a[@class='active']")));
+        actions.contextClick(selectedPlaylist).perform();
+    }
+
+    public void selectEditPlaylistOption() {
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@data-testid='playlist-context-menu-edit-85383']"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@id='playlists']//li[contains(text(),'Edit')]"))).click();
+    }
+
+    public void editPlaylist(String newPlaylistName) {
+        WebElement editPlaylistField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@class='playlist playlist editing']//input[@type='text']")));
+        editPlaylistField.sendKeys(Keys.chord(Keys.CONTROL, "A", Keys.BACK_SPACE));
+        editPlaylistField.sendKeys(newPlaylistName);
+        editPlaylistField.sendKeys(Keys.ENTER);
+    }
+
+    public String getPlaylistUpdatedMsg() {
+        WebElement updatedPlaylistMsg = wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.cssSelector("div.success.show")));
+        return updatedPlaylistMsg.getText();
     }
 }
