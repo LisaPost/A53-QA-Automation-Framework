@@ -13,13 +13,11 @@ public class BasePage {
     WebDriver driver;
     WebDriverWait wait;
     Actions actions;
-    //constructor:
     public BasePage(WebDriver givenDriver) {
         driver = givenDriver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         actions = new Actions(driver);
     }
-    //page methods:
     public WebElement findElement(By locator) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }

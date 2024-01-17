@@ -1,9 +1,7 @@
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
-import pages.PlaylistPage;
 
 public class HomeTests extends BaseTest {
     @Test(dataProvider = "AddPlaylistPositiveTest", dataProviderClass = BaseTest.class, priority = 3)
@@ -24,14 +22,10 @@ public class HomeTests extends BaseTest {
     public void addNewSongToPlaylist (String username, String password, String playlistName, String song) {
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
-        //PlaylistPage playlistPage = new PlaylistPage(driver);
 
         String expectedSongAddedMsg = "Added 1 song into \""+ playlistName + ".\"";
 
         loginPage.login(username, password);
-        //homePage.clickCreatePlaylistBtn();
-        //homePage.selectCreateSimplePlaylistOption();
-        //homePage.enterPlaylistName(playlistName);
         homePage.searchSong(song);
         homePage.viewAll();
         homePage.selectFirstSongOnList();
@@ -45,10 +39,8 @@ public class HomeTests extends BaseTest {
         HomePage homePage = new HomePage(driver);
 
         loginPage.login(username, password);
-        //homePage.playNextSong();
         homePage.clickPlay();
 
         Assert.assertTrue(homePage.isSongPlaying());
     }
-
 }

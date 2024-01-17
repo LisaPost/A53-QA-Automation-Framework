@@ -12,7 +12,6 @@ public class BaseTest {
     public static WebDriver driver = null;
     public static WebDriverWait wait = null;
     public static Actions actions = null;
-    //public FluentWait<WebDriver> fluentWait;
 
     @DataProvider(name = "LoginPositiveTest")
     public Object[][] getDataForPositiveLogin() {
@@ -70,10 +69,6 @@ public class BaseTest {
 
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        /*fluentWait = new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(10))
-                .pollingEvery(Duration.ofSeconds(5))
-                .ignoring(NoSuchElementException.class);*/
         actions = new Actions(driver);
         driver.get(BaseUrl);
     }
