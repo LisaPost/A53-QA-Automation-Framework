@@ -1,6 +1,5 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,10 +22,12 @@ public class LoginPage extends BasePage{
         passwordField.sendKeys(password);
         return this;
     }
+    @SuppressWarnings("UnusedReturnValue")
     public LoginPage clickSubmit() {
         submitBtn.click();
         return this;
     }
+    @SuppressWarnings("UnusedReturnValue")
     public LoginPage login(String username, String password){
         provideEmail(username);
         providePassword(password);

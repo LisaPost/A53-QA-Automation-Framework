@@ -13,14 +13,13 @@ public class PlaylistPage extends BasePage {
     WebElement deletePlaylistBtn;
     @FindBy(css = "div.success.show")
     WebElement parentSuccessMsg;
-    //@FindBy(xpath = "//p[@class='msg']")
-    //WebElement submitDialog;
     @FindBy(xpath = "//button[@class='ok']")
     WebElement submitOkBtn;
     public PlaylistPage selectPlaylist() {
         selectPlaylist.click();
         return this;
     }
+    @SuppressWarnings("UnusedReturnValue")
     public PlaylistPage tapDeletePlaylistBtn() {
 
         deletePlaylistBtn.click();

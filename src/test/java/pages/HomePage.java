@@ -34,6 +34,7 @@ public class HomePage extends BasePage {
         createSimplePlaylistOption.click();
         return this;
     }
+    @SuppressWarnings("UnusedReturnValue")
     public HomePage enterPlaylistName(String playlistName) {
         playlistNameTextField.sendKeys(playlistName);
         playlistNameTextField.sendKeys(Keys.ENTER);
@@ -63,6 +64,7 @@ public class HomePage extends BasePage {
         }
         return this;
     }
+    @SuppressWarnings("UnusedReturnValue")
     public HomePage addSelectedSongToExistingPlaylist() {
         try {
             addToPlaylistBtn.click();
@@ -80,10 +82,9 @@ public class HomePage extends BasePage {
             return null;
         }
     }
+    @SuppressWarnings("UnusedReturnValue")
     public HomePage clickPlay(){
         WebElement playNextBtn = driver.findElement(By.xpath("//i[@data-testid='play-next-btn']"));
-        //findElement(playNextBtn).click();
-        //findElement(playBtn).click();
         WebElement playButton = driver.findElement(By.xpath("//span[@data-testid='play-btn']"));
         playNextBtn.click();
         playButton.click();
