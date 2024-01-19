@@ -12,9 +12,9 @@ public class HomeTests extends BaseTest {
         String expectedPlaylistCreatedMsg = "Created playlist \"" + playlistName + ".\"";
 
         loginPage.login(username, password);
-        homePage.clickCreatePlaylistBtn();
-        homePage.selectCreateSimplePlaylistOption();
-        homePage.enterPlaylistName(playlistName);
+        homePage.clickCreatePlaylistBtn()
+                .selectCreateSimplePlaylistOption()
+                .enterPlaylistName(playlistName);
 
         Assert.assertEquals(homePage.getPlaylistCreatedMsg(), expectedPlaylistCreatedMsg);
     }
@@ -26,10 +26,10 @@ public class HomeTests extends BaseTest {
         String expectedSongAddedMsg = "Added 1 song into \""+ playlistName + ".\"";
 
         loginPage.login(username, password);
-        homePage.searchSong(song);
-        homePage.viewAll();
-        homePage.selectFirstSongOnList();
-        homePage.addSelectedSongToExistingPlaylist();
+        homePage.searchSong(song)
+                .viewAll()
+                .selectFirstSongOnList()
+                .addSelectedSongToExistingPlaylist();
 
         Assert.assertEquals(homePage.getSongAddedMsg(), expectedSongAddedMsg);
     }

@@ -1,79 +1,93 @@
 package pages;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends BasePage {
     public HomePage(WebDriver givenDriver) {
         super(givenDriver);
     }
-    private By userAvatarIcon = By.cssSelector("img.avatar");
-    final By createPlaylistBtn = By.xpath("//i[@data-testid='sidebar-create-playlist-btn']");
-    private By createSimplePlaylistOption = By.xpath("//li[@data-testid='playlist-context-menu-create-simple']");
-    private By playlistNameTextField = By.xpath("//section[@id='playlists']//input[@type='text']");
-    private By parentSuccessMsg = By.cssSelector("div.success.show");
-    private By searchField = By.cssSelector("input[type='search']");
-    private By viewAllSongsBtn = By.cssSelector("button[data-test='view-all-songs-btn']");
-    private By firstSongOnList = By.xpath("//section[@id='songResultsWrapper']//table[contains(@class, 'items')]//tr[1]");
-    private By addToPlaylistBtn = By.cssSelector("button[class='btn-add-to']");
-    private By playlistInDropdown = By.xpath("//section[@id='songResultsWrapper']//li[contains(@class,'playlist') and contains(text(),'New Playlist')]");
+    @FindBy(css = "img.avatar")
+    WebElement userAvatarIcon;
+    @FindBy(xpath = "//i[@data-testid='sidebar-create-playlist-btn']")
+    WebElement createPlaylistBtn;
+    @FindBy(xpath = "//li[@data-testid='playlist-context-menu-create-simple']")
+    WebElement createSimplePlaylistOption;
+    @FindBy(xpath = "//section[@id='playlists']//input[@type='text']")
+    WebElement playlistNameTextField;
+    @FindBy(css = "div.success.show")
+    WebElement parentSuccessMsg;
+    @FindBy(css = "[type='search']")
+    WebElement searchField;
+    @FindBy(css = "[data-test='view-all-songs-btn']")
+    WebElement viewAllSongsBtn;
+    @FindBy(xpath = "//section[@id='songResultsWrapper']//table[contains(@class, 'items')]//tr[1]")
+    WebElement firstSongOnList;
+    @FindBy(css = "[class='btn-add-to']")
+    WebElement addToPlaylistBtn;
+    @FindBy(xpath = "//section[@id='songResultsWrapper']//li[contains(@class,'playlist') and contains(text(),'New Playlist')]")
+    WebElement playlistInDropdown;
 
-    public WebElement getUserAvatar() {
-        return findElement(userAvatarIcon);
+    public WebElement getUserAvatar() {return userAvatarIcon;}
+    public HomePage clickCreatePlaylistBtn() {createPlaylistBtn.click(); return this;}
+    public HomePage selectCreateSimplePlaylistOption() {
+        createSimplePlaylistOption.click();
+        return this;
     }
-    public void clickCreatePlaylistBtn() {
-        findElement(createPlaylistBtn).click();
-    }
-    public void selectCreateSimplePlaylistOption() {
-        findElementToClick(createSimplePlaylistOption).click();
-    }
-    public void enterPlaylistName(String playlistName) {
-        findElement(playlistNameTextField).sendKeys(playlistName);
-        findElement(playlistNameTextField).sendKeys(Keys.ENTER);
+    public HomePage enterPlaylistName(String playlistName) {
+        playlistNameTextField.sendKeys(playlistName);
+        playlistNameTextField.sendKeys(Keys.ENTER);
+        return this;
     }
     public String getPlaylistCreatedMsg() {
-        return findElement(parentSuccessMsg).getText();
+        return parentSuccessMsg.getText();
     }
-    public void searchSong(String song) {
-        findElement(searchField).clear();
-        findElement(searchField).sendKeys(song);
+    public HomePage searchSong(String song) {
+        searchField.clear();
+        searchField.sendKeys(song);
+        return this;
     }
-    public void viewAll() {
+    public HomePage viewAll() {
         try {
-            findElementToClick(viewAllSongsBtn).click();
+            viewAllSongsBtn.click();
         } catch (Exception e) {
             System.out.println("Smth went wrong: " + e);
         }
+        return this;
     }
-    public void selectFirstSongOnList() {
+    public HomePage selectFirstSongOnList() {
         try {
-            findElementToClick(firstSongOnList).click();
+            firstSongOnList.click();
         } catch (Exception e) {
             System.out.println("Smth went wrong: " + e);
         }
+        return this;
     }
-    public void addSelectedSongToExistingPlaylist() {
+    public HomePage addSelectedSongToExistingPlaylist() {
         try {
-            findElementToClick(addToPlaylistBtn).click();
-            findElement(playlistInDropdown).click();
+            addToPlaylistBtn.click();
+            playlistInDropdown.click();
         } catch (Exception e) {
             System.out.println("Smth went wrong: " + e);
         }
+        return this;
     }
     public String getSongAddedMsg() {
         try {
-            return findElement(parentSuccessMsg).getText();
+            return parentSuccessMsg.getText();
         } catch (Exception e) {
             System.out.println("Smth went wrong: " + e);
             return null;
         }
     }
-    public void clickPlay(){
+    public HomePage clickPlay(){
         WebElement playNextBtn = driver.findElement(By.xpath("//i[@data-testid='play-next-btn']"));
         //findElement(playNextBtn).click();
         //findElement(playBtn).click();
         WebElement playButton = driver.findElement(By.xpath("//span[@data-testid='play-btn']"));
         playNextBtn.click();
         playButton.click();
+        return this;
     }
     public boolean isSongPlaying(){
         WebElement soundBar = driver.findElement(By.xpath("//div[@data-testid='sound-bar-play']"));

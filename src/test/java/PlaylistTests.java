@@ -13,8 +13,7 @@ public class PlaylistTests extends BaseTest {
         String expectedPlaylistDeletedMsg = "Deleted playlist \"" + emptyPlaylistName + ".\"";
 
         loginPage.login(username, password);
-        playlistPage.selectPlaylist();
-        playlistPage.tapDeletePlaylistBtn();
+        playlistPage.selectPlaylist().tapDeletePlaylistBtn();
 
         Assert.assertEquals(playlistPage.getPlaylistDeletedMsg(), expectedPlaylistDeletedMsg);
     }

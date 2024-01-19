@@ -9,9 +9,7 @@ public class LoginTests extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
 
-        loginPage.provideEmail(username);
-        loginPage.providePassword(password);
-        loginPage.clickSubmit();
+        loginPage.provideEmail(username).providePassword(password).clickSubmit();
 
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
     }
@@ -19,9 +17,7 @@ public class LoginTests extends BaseTest {
     public void loginWithIncorrectCredentials(String username, String password, String BaseUrl) {
         LoginPage loginPage = new LoginPage(driver);
 
-        loginPage.provideEmail(username);
-        loginPage.providePassword(password);
-        loginPage.clickSubmit();
+        loginPage.provideEmail(username).providePassword(password).clickSubmit();
 
         Assert.assertEquals(driver.getCurrentUrl(), BaseUrl);
     }
