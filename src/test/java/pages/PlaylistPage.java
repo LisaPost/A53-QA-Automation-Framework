@@ -6,12 +6,12 @@ public class PlaylistPage extends BasePage {
     public PlaylistPage(WebDriver givenDriver) {
         super(givenDriver);
     }
-    By selectPlaylist = By.xpath("//section[@id='playlists']//a[contains(text(),'New Playlist')]");
+    private By selectPlaylist = By.xpath("//section[@id='playlists']//a[contains(text(),'New Playlist')]");
     //By playlistDeletedMsg = By.cssSelector("div.success.show");
-    By deletePlaylistBtn = By.xpath("//button[@class='del btn-delete-playlist']");
-    By parentSuccessMsg = By.cssSelector("div.success.show");
-    By submitDialog = By.xpath("//p[@class='msg']");
-    By submitOkBtn = By.xpath("//button[@class='ok']");
+    private By deletePlaylistBtn = By.xpath("//button[@class='del btn-delete-playlist']");
+    private By parentSuccessMsg = By.cssSelector("div.success.show");
+    private By submitDialog = By.xpath("//p[@class='msg']");
+    private By submitOkBtn = By.xpath("//button[@class='ok']");
 
     public void selectPlaylist() {
         findElement(selectPlaylist).click();

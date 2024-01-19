@@ -6,16 +6,16 @@ public class HomePage extends BasePage {
     public HomePage(WebDriver givenDriver) {
         super(givenDriver);
     }
-    By userAvatarIcon = By.cssSelector("img.avatar");
-    By createPlaylistBtn = By.xpath("//i[@data-testid='sidebar-create-playlist-btn']");
-    By createSimplePlaylistOption = By.xpath("//li[@data-testid='playlist-context-menu-create-simple']");
-    By playlistNameTextField = By.xpath("//section[@id='playlists']//input[@type='text']");
-    By parentSuccessMsg = By.cssSelector("div.success.show");
-    By searchField = By.cssSelector("input[type='search']");
-    By viewAllSongsBtn = By.cssSelector("button[data-test='view-all-songs-btn']");
-    By firstSongOnList = By.xpath("//section[@id='songResultsWrapper']//table[contains(@class, 'items')]//tr[1]");
-    By addToPlaylistBtn = By.cssSelector("button[class='btn-add-to']");
-    By playlistInDropdown = By.xpath("//section[@id='songResultsWrapper']//li[contains(@class,'playlist') and contains(text(),'New Playlist')]");
+    private By userAvatarIcon = By.cssSelector("img.avatar");
+    final By createPlaylistBtn = By.xpath("//i[@data-testid='sidebar-create-playlist-btn']");
+    private By createSimplePlaylistOption = By.xpath("//li[@data-testid='playlist-context-menu-create-simple']");
+    private By playlistNameTextField = By.xpath("//section[@id='playlists']//input[@type='text']");
+    private By parentSuccessMsg = By.cssSelector("div.success.show");
+    private By searchField = By.cssSelector("input[type='search']");
+    private By viewAllSongsBtn = By.cssSelector("button[data-test='view-all-songs-btn']");
+    private By firstSongOnList = By.xpath("//section[@id='songResultsWrapper']//table[contains(@class, 'items')]//tr[1]");
+    private By addToPlaylistBtn = By.cssSelector("button[class='btn-add-to']");
+    private By playlistInDropdown = By.xpath("//section[@id='songResultsWrapper']//li[contains(@class,'playlist') and contains(text(),'New Playlist')]");
 
     public WebElement getUserAvatar() {
         return findElement(userAvatarIcon);
