@@ -9,9 +9,9 @@ import org.testng.annotations.*;
 import java.time.Duration;
 
 public class BaseTest {
-    public static WebDriver driver = null;
-    public static WebDriverWait wait = null;
-    public static Actions actions = null;
+    protected WebDriver driver = null;
+    protected WebDriverWait wait = null;
+    protected Actions actions = null;
 
     @DataProvider(name = "LoginPositiveTest")
     public Object[][] getDataForPositiveLogin() {
