@@ -21,7 +21,8 @@ public class HomePage extends BasePage {
     WebElement searchField;
     @FindBy(css = "[data-test='view-all-songs-btn']")
     WebElement viewAllSongsBtn;
-    @FindBy(xpath = "//section[@id='songResultsWrapper']//table[contains(@class, 'items')]//tr[1]")
+    //@FindBy(xpath = "//section[@id='songResultsWrapper']//table[contains(@class, 'items')]//tr[1]")
+    @FindBy(css = ".all-songs tr.song-item:nth-child(1)")
     WebElement firstSongOnList;
     @FindBy(css = "[class='btn-add-to']")
     WebElement addToPlaylistBtn;

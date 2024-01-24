@@ -2,6 +2,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
@@ -54,16 +55,18 @@ public class BaseTest {
 
     @BeforeSuite
     static void setupClass() {
-        WebDriverManager.chromedriver().setup();
+        //WebDriverManager.chromedriver().setup();
+        WebDriverManager.firefoxdriver().setup();
     }
 
     @BeforeMethod
     @Parameters({"BaseUrl"})
     public void launchBrowser(String BaseUrl) {
-        ChromeOptions options = new ChromeOptions();
+        /*ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
 
-        driver = new ChromeDriver(options);
+        driver = new ChromeDriver(options);*/
+        driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
 
