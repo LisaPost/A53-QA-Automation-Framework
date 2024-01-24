@@ -51,16 +51,20 @@ public class HomePage extends BasePage {
     public HomePage viewAll() {
         try {
             viewAllSongsBtn.click();
+            System.out.println("view all btn is tapped");
         } catch (Exception e) {
             System.out.println("Smth went wrong: " + e);
+            System.out.println("view all btn is not tapped");
         }
         return this;
     }
     public HomePage selectFirstSongOnList() {
         try {
             firstSongOnList.click();
+            System.out.println("first song is selected");
         } catch (Exception e) {
             System.out.println("Smth went wrong: " + e);
+            System.out.println("first song is not selected");
         }
         return this;
     }
@@ -69,8 +73,10 @@ public class HomePage extends BasePage {
         try {
             addToPlaylistBtn.click();
             playlistInDropdown.click();
+            System.out.println("song is added to playlist");
         } catch (Exception e) {
             System.out.println("Smth went wrong: " + e);
+            System.out.println("song is not added to playlist");
         }
         return this;
     }
