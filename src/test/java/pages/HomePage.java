@@ -42,66 +42,10 @@ public class HomePage extends BasePage {
     public WebElement getUserAvatar() {
         return userAvatarIcon;
     }
-    @SuppressWarnings("UnusedReturnValue")
-    /*public void clickCreatePlaylistBtn() {
-        //createPlaylistBtn.click();
-        //return this;
-        //return findElement(createPlaylistBtn);
-        findElement(createPlaylistBtn).click();
-    }*/
-    /*public HomePage clickCreatePlaylistBtn() {
-        createPlaylistBtn.click();
-        return this;}*/
-    /*public HomePage selectCreateSimplePlaylistOption() {
-        createSimplePlaylistOption.click();
-        return this;
-    }*/
-
-    /*public HomePage enterPlaylistName(String playlistName) {
-        playlistNameTextField.sendKeys(playlistName);
-        playlistNameTextField.sendKeys(Keys.ENTER);
-        return this;
-    }*/
     public String getPlaylistCreatedMsg() {
         return parentSuccessMsg.getText();
     }
-    /*public HomePage searchSong(String song) {
-        searchField.clear();
-        searchField.sendKeys(song);
-        return this;
-    }*/
-    /*public HomePage viewAll() {
-        try {
-            viewAllSongsBtn.click();
-            System.out.println("view all btn is tapped");
-        } catch (Exception e) {
-            System.out.println("Smth went wrong: " + e);
-            System.out.println("view all btn is not tapped");
-        }
-        return this;
-    }*/
-    /*public HomePage selectFirstSongOnList() {
-        try {
-            firstSongOnList.click();
-            System.out.println("first song is selected");
-        } catch (Exception e) {
-            System.out.println("Smth went wrong: " + e);
-            System.out.println("first song is not selected");
-        }
-        return this;
-    }*/
-    @SuppressWarnings("UnusedReturnValue")
-    /*public HomePage addSelectedSongToExistingPlaylist() {
-        try {
-            addToPlaylistBtn.click();
-            playlistInDropdown.click();
-            System.out.println("song is added to playlist");
-        } catch (Exception e) {
-            System.out.println("Smth went wrong: " + e);
-            System.out.println("song is not added to playlist");
-        }
-        return this;
-    }*/
+
     public String getSongAddedMsg() {
         try {
             return parentSuccessMsg.getText();
@@ -110,14 +54,6 @@ public class HomePage extends BasePage {
             return null;
         }
     }
-    @SuppressWarnings("UnusedReturnValue")
-    /*public HomePage clickPlay(){
-        WebElement playNextBtn = driver.findElement(By.xpath("//i[@data-testid='play-next-btn']"));
-        WebElement playButton = driver.findElement(By.xpath("//span[@data-testid='play-btn']"));
-        playNextBtn.click();
-        playButton.click();
-        return this;
-    }*/
     public boolean isSongPlaying(){
         return soundBar.isDisplayed();
     }
