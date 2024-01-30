@@ -5,7 +5,11 @@ import org.testng.annotations.*;
 
 @Test
 @CucumberOptions(
-        features = {"src/test/resources/features/Login.feature"},
+        features = {"src/test/resources/features/Login.feature",
+                "src/test/resources/features/CreatePlaylist.feature",
+                "src/test/resources/features/PlaySong.feature"},
+        //"src/test/resources/features/AddNewSongToPlaylist.feature",
+        //features = {"src/test/resources/features/DeletePlaylist.feature"},
         publish = true
 )
 public class CucumberRunner extends AbstractTestNGCucumberTests {

@@ -1,8 +1,8 @@
-Feature: Login feature
+Feature: User should be able to login
+  Background:
+    Given I open Login page
 
   Scenario Outline: Login Success
-    //Given I open browser
-    Given I open Login page
     When I enter email "<email>"
     And I enter password "<password>"
     And I submit
@@ -13,8 +13,6 @@ Feature: Login feature
     | demo@class.com                 | te$t$tudent    |
 
   Scenario Outline: Login Failed
-    //Given I open browser
-    Given I open Login page
     When I enter email "<email>"
     And I enter password "<password>"
     And I submit

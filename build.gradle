@@ -24,6 +24,8 @@ test {
     useTestNG() {
         suites "src/test/resources/TestNG.xml"
         //systemProperty "browser", System.getProperty("browser", "chrome")
-        systemProperty "browser", project.findProperty('browser') ?: 'chrome'
+        //systemProperty "browser", project.findProperty('browser') ?: 'chrome'
+        //systemProperty "browser", project.findProperty('browser')
+        systemProperty "browser", System.getProperty("browser")
     }
 }

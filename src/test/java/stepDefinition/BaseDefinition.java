@@ -19,7 +19,7 @@ import java.time.Duration;
 public class BaseDefinition {
     private static final ThreadLocal<WebDriver> threadLocal = new ThreadLocal<>();
     private WebDriver driver = null;
-    private int timeSeconds = 3;
+    private final int timeSeconds = 10;
     public static WebDriver getThreadLocal() {
         return threadLocal.get();
     }
@@ -31,7 +31,7 @@ public class BaseDefinition {
     }
     public WebDriver pickBrowser(String browser) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
-        String gridURL = "";
+        String gridURL = "http://192.168.1.78:4444";
         switch (browser) {
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
