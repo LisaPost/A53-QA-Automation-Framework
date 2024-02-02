@@ -14,6 +14,8 @@ public class LoginPage extends BasePage{
     WebElement passwordField;
     @FindBy(css = "[type='submit']")
     WebElement submitBtn;
+    /*@FindBy(xpath = "//a[@href='registration']")
+    WebElement regLink;*/
     public LoginPage provideEmail(String username) {
         emailField.sendKeys(username);
         return this;
@@ -34,4 +36,8 @@ public class LoginPage extends BasePage{
         clickSubmit();
         return this;
     }
+    /*public LoginPage clickRegLink() {
+        regLink.click();
+        return this;
+    }*/
 }

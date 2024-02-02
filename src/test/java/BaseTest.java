@@ -17,6 +17,7 @@ import java.time.Duration;
 
 public class BaseTest {
     protected WebDriver driver = null;
+    private static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
     protected WebDriverWait wait = null;
     protected Actions actions = null;
 
@@ -44,39 +45,48 @@ public class BaseTest {
                 {"yelyzaveta.postnova@testpro.io", "YrkeNi92", "New Playlist"}
         };
     }
+    @DataProvider(name = "DeleteEmptyPlaylistPositiveTest")
+    public Object[][] getDataForDeleteEmptyPlaylist() {
+        return new Object[][]{
+                {"yelyzaveta.postnova@testpro.io", "YrkeNi92", "Playlist to Delete"}
+        };
+    }
+    @DataProvider(name = "DeletePlaylistWithSong")
+    public Object[][] getDataForDeletePlaylistWithSong() {
+        return new Object[][]{
+                {"yelyzaveta.postnova@testpro.io", "YrkeNi92", "Playlist with song to Delete", "take my hand"}
+        };
+    }
 
     @DataProvider(name = "RenamePlaylistPositiveTest")
     public Object[][] getDataForRenamePlaylist() {
         return new Object[][]{
-                {"yelyzaveta.postnova@testpro.io", "YrkeNi92", "New Playlist", "Renamed Playlist"}
+                {"yelyzaveta.postnova@testpro.io", "YrkeNi92", "Playlist to Rename", "Renamed Playlist"}
         };
     }
 
     @DataProvider(name = "AddSongPositiveTest")
     public Object[][] getDataForAddSong() {
         return new Object[][]{
-                {"yelyzaveta.postnova@testpro.io", "YrkeNi92", "New Playlist", "take my hand"}
+                {"yelyzaveta.postnova@testpro.io", "YrkeNi92", "Playlist to add a song", "take my hand"}
         };
     }
 
     @BeforeSuite
     static void setupClass() {
-
         WebDriverManager.chromedriver().setup();
-        //WebDriverManager.firefoxdriver().setup();
     }
-
     @BeforeMethod
     @Parameters({"BaseUrl"})
     public void launchBrowser(String BaseUrl) throws MalformedURLException {
-        driver = pickBrowser(System.getProperty("browser"));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
+        threadDriver.set(pickBrowser(System.getProperty("browser")));
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        //getDriver().manage().window().maximize();
 
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
 
-        actions = new Actions(driver);
-        driver.get(BaseUrl);
+        actions = new Actions(getDriver());
+        getDriver().get(BaseUrl);
     }
     public WebDriver pickBrowser(String browser) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
@@ -106,9 +116,13 @@ public class BaseTest {
                 return driver = new ChromeDriver(chromeOptions);
         }
     }
+    public static WebDriver getDriver() {
+        return threadDriver.get();
+    }
 
     @AfterMethod
-    public void closeBrowser() {
-        driver.quit();
+    public void tearDown() {
+        threadDriver.get().close();
+        threadDriver.remove();
     }
 }
