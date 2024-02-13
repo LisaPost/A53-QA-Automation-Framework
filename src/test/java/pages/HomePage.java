@@ -71,6 +71,11 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//form[@data-testid='create-smart-playlist-form']")
     public WebElement smartPlaylistCreationForm;
 
+    public void clickCreatePlaylistBtn() {
+        WebElement plusButton = waitElementToBeClickable(createPlaylistBtn);
+        actions.moveToElement(plusButton).click().perform();
+    }
+
     public WebElement getSmartPlaylist(String smartPlaylistName) {
         String xpathExpression = String.format("//section[@id='playlists']//li[@class='playlist playlist smart']/a[text()='%s']", smartPlaylistName);
         WebDriverWait wait = new WebDriverWait(BaseDefinition.getThreadLocal(), Duration.ofSeconds(10));
