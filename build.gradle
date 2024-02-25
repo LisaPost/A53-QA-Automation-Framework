@@ -10,14 +10,18 @@ repositories {
 }
 
 dependencies {
+    //UI testing dependencies:
     testImplementation 'org.testng:testng:7.6.1'
     implementation 'org.seleniumhq.selenium:selenium-java:4.5.0'
-    testImplementation 'io.github.bonigarcia:webdrivermanager:5.4.1'
+    testImplementation 'io.github.bonigarcia:webdrivermanager:5.6.3'
+
+    //API testing dependencies:
+    testImplementation 'io.rest-assured:rest-assured:4.4.0'
 }
 
 test {
     useTestNG() {
-        suites "src/test/resources/TestNG.xml"
+        suites "src/test/resources/TestNG.xml", "src/test/resources/APITestNG.xml" // Include both UI and API test suites
         systemProperty "browser", System.getProperty("browser")
     }
 }
