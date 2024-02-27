@@ -3,6 +3,7 @@
     <test name="API Test Suite">
         <classes>
             <class name="APITests"/>
+            <class name="APIAnotherTests"/>
         </classes>
     </test>
 </suite>

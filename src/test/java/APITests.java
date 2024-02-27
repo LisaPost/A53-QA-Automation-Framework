@@ -75,6 +75,7 @@ public class APITests {
         System.out.println("Response body: " + response.getBody().asString());
     }
     private Response loginPlaySongAndGetResponse() {
+        token = loginAndGetToken();
         Response response = given()
                 .header("api-token", token)
                 .get("/play/" + songIdCorrect);
@@ -82,11 +83,9 @@ public class APITests {
     }
 
     @Test
-    public void playSongWithValidSongID() {
+    public void playSongWithValidSongID(String token, String songIdCorrect) {
         Response loginResponse = loginAndGetResponse();
-        token = getTokenFromResponse(loginResponse);
-        System.out.println("Token used for request: " + token);
-        System.out.println("Song ID used for request: " + songIdCorrect);
+
         Response response = given()
                 .header("api-token", token)
                 .get("/play/" + songIdCorrect);
@@ -97,6 +96,10 @@ public class APITests {
         Assert.assertTrue(responseBody.contains("It's Your Birthday!"), "Body does not contain song name");
         System.out.println("Play song status code: " + statusCode);
         System.out.println("Response body: " + response.getBody().asString());
+
+        token = getTokenFromResponse(loginResponse);
+        System.out.println("Token used for request: " + token);
+        System.out.println("Song ID used for request: " + songIdCorrect);
     }
     /*@Test
     public void playSongWithValidSongID() {
