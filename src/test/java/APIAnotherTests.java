@@ -1,3 +1,4 @@
+
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -5,7 +6,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 public class APIAnotherTests {
 
-    private String baseURL;
+    /*private String baseURL;
     private String token;
     private static final String songIdCorrect = "3d98035ebc9b79381d0a0bec8be9b1c9";
     private static final String songIdIncorrect = "3d98035ebc9b79381d0a0bec8be44444";
@@ -14,6 +15,7 @@ public class APIAnotherTests {
     public void setUp() {
         baseURL = "https://qa.koel.app/api";
     }
+
 
     @Test
     public void testPostAPI() {
@@ -33,7 +35,6 @@ public class APIAnotherTests {
         System.out.println("token: " + token);
         System.out.println("Response body: " + response.getBody().asString());
     }
-
     @Test(dependsOnMethods = "testPostAPI")
     public void testGetCorrectSong() {
         testGetSongWithToken(songIdCorrect, token, 200, "It's Your Birthday!");
@@ -67,7 +68,7 @@ public class APIAnotherTests {
         System.out.println("token: " + token);
     }
 }
-/*
+
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -133,6 +134,6 @@ public class APIAnotherTests {
         Assert.assertTrue(response.getBody().asString().contains("The PUT method is not supported for this route. Supported methods: GET, HEAD."));
         System.out.println("Incorrect Song status code: " + statusCode);
         System.out.println("token: " + token);
-    }
+    }*/
 }
-*/
+

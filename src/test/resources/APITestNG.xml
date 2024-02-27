@@ -2,8 +2,8 @@
 <suite name="APITestNG">
     <test name="API Test Suite">
         <classes>
-            <class name="APITests"/>
-            <class name="APIAnotherTests"/>
+            <class name="ApiPlaySongTests"/>
+            <class name="ApiRecentlyPlayedSongsTests"/>
         </classes>
     </test>
 </suite>
