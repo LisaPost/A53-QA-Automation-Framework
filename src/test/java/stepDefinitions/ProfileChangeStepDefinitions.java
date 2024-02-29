@@ -59,4 +59,11 @@ public class ProfileChangeStepDefinitions {
         wait.until(ExpectedConditions.textToBePresentInElement(homePage.actualProfileName, profilePage.getEnteredProfileName()));
         Assert.assertEquals(homePage.actualProfileName.getText(), profilePage.getEnteredProfileName());
     }
+
+    @When("I provide {string}")
+    public void userProvidesNewEmail(String new_email) {
+        ProfilePage profilePage = new ProfilePage(BaseDefinition.getThreadLocal());
+        profilePage.profileEmailAddressField.clear();
+        profilePage.profileEmailAddressField.sendKeys(new_email);
+    }
 }

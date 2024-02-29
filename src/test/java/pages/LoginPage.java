@@ -4,11 +4,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import stepDefinitions.BaseDefinition;
 
 public class LoginPage extends BasePage{
     public LoginPage(WebDriver givenDriver) {
         super(givenDriver);
-        //PageFactory.initElements(givenDriver, this);
     }
     @FindBy(css = "[type='email']")
     WebElement emailField;
@@ -18,6 +18,10 @@ public class LoginPage extends BasePage{
     WebElement submitBtn;
     @FindBy(xpath = "//a[@href='registration']")
     public WebElement regLink;
+    @FindBy(xpath = "//a[text()='Registration / Forgot password']")
+    public WebElement registerOrForgotPasswordLink;
+    @FindBy(xpath = "//div[@class='login-wrapper']//form[@class='error']")
+    public WebElement loginError;
     public LoginPage provideEmail(String username) {
         emailField.sendKeys(username);
         return this;
@@ -37,5 +41,8 @@ public class LoginPage extends BasePage{
         providePassword(password);
         clickSubmit();
         return this;
+    }
+    public WebElement showLoginError() {
+        return loginError;
     }
 }

@@ -18,6 +18,8 @@ public class ProfilePage extends BasePage{
     public WebElement profileNameField;
     @FindBy(xpath = "//button[@class='btn-submit']")
     public WebElement saveProfileBtn;
+    @FindBy(xpath = "//input[@id='inputProfileEmail']")
+    public WebElement profileEmailAddressField;
 
     public String getEnteredProfileName() {
         return profileNameField.getAttribute("value");

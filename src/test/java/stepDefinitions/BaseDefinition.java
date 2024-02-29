@@ -11,27 +11,30 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import pages.HomePage;
-import pages.PlaylistPage;
+
 
 import java.net.MalformedURLException;
 import java.net.URI;
+
 import java.time.Duration;
 
 public class BaseDefinition {
-    private static final ThreadLocal<WebDriver> threadLocal = new ThreadLocal<>();
+    //private static final ThreadLocal<WebDriver> threadLocal = new ThreadLocal<>();
+    protected static final ThreadLocal<WebDriver> threadLocal = new ThreadLocal<>();
     private WebDriver driver = null;
     private final int timeSeconds = 10;
+
     public static WebDriver getThreadLocal() {
         return threadLocal.get();
     }
     @Before
     public void setUpBrowser() throws MalformedURLException {
+        DatabaseUtils.updateUserEmail(29127, "yelyzaveta.postnova@testpro.io");
         threadLocal.set(pickBrowser(System.getProperty("browser")));
         threadLocal.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(timeSeconds));
         System.out.println("Browser setup by Thread " + Thread.currentThread().getId() + " and Driver reference is: " + getThreadLocal());
     }
-    public WebDriver pickBrowser(String browser) throws MalformedURLException {
+    protected WebDriver pickBrowser(String browser) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
         String gridURL = "http://192.168.1.78:4444";
         switch (browser) {
@@ -61,21 +64,6 @@ public class BaseDefinition {
 
         }
     }
-    /*@After
-    public void cleanup() {
-        deleteAllPlaylists();
-    }
-    private void deleteAllPlaylists() {
-        HomePage homePage = new HomePage(BaseDefinition.getThreadLocal());
-        PlaylistPage playlistPage = new PlaylistPage(BaseDefinition.getThreadLocal());
-        homePage.selectNewPlaylistToDelete.click();
-        playlistPage.deletePlaylistBtn.click();
-        homePage.selectRenamedPlaylistToDelete.click();
-        playlistPage.deletePlaylistBtn.click();
-        homePage.selectAddSongPlaylistToDelete.click();
-        playlistPage.deletePlaylistBtn.click();
-        playlistPage.submitOkBtn.click();
-    }*/
     @After
     public void tearDown() {
         threadLocal.get().close();

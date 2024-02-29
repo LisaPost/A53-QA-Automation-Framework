@@ -54,12 +54,8 @@ public class HomePage extends BasePage {
     public WebElement selectPlaylistToDelete;
     @FindBy(xpath = "//section[@id='playlists']//a[contains(text(),\"Playlist to Delete\")]")
     public WebElement selectEmptyPlaylistToDelete;
-    /*@FindBy(xpath = "//section[@id='playlists']//a[contains(text(),\"New Playlist\")]")
-    public WebElement selectNewPlaylistToDelete;
-    @FindBy(xpath = "//section[@id='playlists']//a[contains(text(),\"Renamed Playlist\")]")
-    public WebElement selectRenamedPlaylistToDelete;
-    @FindBy(xpath = "//section[@id='playlists']//a[contains(text(),\"Playlist with Song\")]")
-    public WebElement selectAddSongPlaylistToDelete;*/
+    @FindBy(xpath = "//a[@class='logout control']//i[@class='fa fa-sign-out']")
+    public WebElement logOutBtn;
 
     public WebElement getUserAvatar() {return userAvatarIcon;}
 
