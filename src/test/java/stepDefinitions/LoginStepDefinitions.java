@@ -92,7 +92,8 @@ public class LoginStepDefinitions {
 
     @And("I navigate to Reset password link in my email")
     public void iNavigateToResetPasswordLinkInMyEmail() throws MalformedURLException {
-        OutlookEmailAutomation automation = new OutlookEmailAutomation(baseDefinition, baseDefinition.getThreadLocal());
+        //OutlookEmailAutomation automation = new OutlookEmailAutomation(baseDefinition, baseDefinition.getThreadLocal());
+        OutlookEmailAutomation automation = new OutlookEmailAutomation();
         String userEmail = "yelyzaveta.postnova@testpro.io";
         String resetLink = automation.extractResetLinkFromEmail(userEmail);
         //BaseDefinition.navigateToResetLink(resetLink);

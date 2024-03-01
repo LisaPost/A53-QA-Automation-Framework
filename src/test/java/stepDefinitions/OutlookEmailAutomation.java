@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 import javax.mail.*;
@@ -12,19 +13,24 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class OutlookEmailAutomation {
-    private BaseDefinition baseDefinition;
+    //private BaseDefinition baseDefinition;
     // last change:
-    private WebDriver driver;
+    //private WebDriver driver;
     // BaseDefinition baseDefinition, WebDriver driver added
-    public OutlookEmailAutomation(BaseDefinition baseDefinition, WebDriver driver) {
+    //public OutlookEmailAutomation(BaseDefinition baseDefinition, WebDriver driver) {
         //baseDefinition = new BaseDefinition();
-        this.baseDefinition = baseDefinition;
-        this.driver = driver;
-    }
+        //this.baseDefinition = baseDefinition;
+        //this.driver = driver;
+    //}
     public void navigateToResetLink(String resetLink) throws MalformedURLException {
-        baseDefinition.threadLocal.set(baseDefinition.pickBrowser(System.getProperty("browser")));
+        //baseDefinition.threadLocal.set(baseDefinition.pickBrowser(System.getProperty("browser")));
         if (resetLink != null) {
-            baseDefinition.getThreadLocal().get(resetLink);
+            WebDriver driver = BaseDefinition.getThreadLocal();
+            JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+            //baseDefinition.getThreadLocal().get(resetLink);
+            //BaseDefinition.getThreadLocal().get(resetLink);
+            //jsExecutor.executeScript("window.open('" + resetLink + "', '_blank');");
+            jsExecutor.executeScript("window.open('" + resetLink + "', '_self');");
             switchToNewTabOrWindow();
         } else {
             System.err.println("Reset link is null. Cannot navigate");
@@ -90,9 +96,14 @@ public class OutlookEmailAutomation {
         return null;
     }
     private void switchToNewTabOrWindow() {
-        Set<String> windowHandles = baseDefinition.getThreadLocal().getWindowHandles();
+        WebDriver driver = BaseDefinition.getThreadLocal();
+        //Set<String> windowHandles = baseDefinition.getThreadLocal().getWindowHandles();
+        //Set<String> windowHandles = BaseDefinition.getThreadLocal().getWindowHandles();
+        Set<String> windowHandles = driver.getWindowHandles();
         for (String windowHandle : windowHandles) {
-            baseDefinition.getThreadLocal().switchTo().window(windowHandle);
+            //baseDefinition.getThreadLocal().switchTo().window(windowHandle);
+            //BaseDefinition.getThreadLocal().switchTo().window(windowHandle);
+            driver.switchTo().window(windowHandle);
         }
     }
 }
