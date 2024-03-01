@@ -23,4 +23,13 @@ public class BasePage {
     public WebElement findElement(By locator) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
+    protected WebElement waitElement(WebElement webElement) {
+        wait.until(ExpectedConditions.visibilityOf(webElement));
+        return webElement;
+    }
+
+    protected WebElement waitElementToBeClickable(WebElement webElement) {
+        wait.until(ExpectedConditions.elementToBeClickable(webElement));
+        return webElement;
+    }
 }

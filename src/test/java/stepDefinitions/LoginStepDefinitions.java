@@ -15,6 +15,8 @@ import java.sql.Statement;
 
 public class LoginStepDefinitions {
     String BaseUrl = "https://qa.koel.app/";
+    String resetPasswordUrl;
+    //String emailUrl = "https://www.microsoft.com/en-us/microsoft-365/outlook/log-in";
     //private BaseDefinition baseDefinition;
     @Given("I open Login page")
     public void openLoginPage() {
@@ -90,15 +92,18 @@ public class LoginStepDefinitions {
         registrationPage.forgotPasswordFormSubmitBtn.click();
     }
 
-    @And("I navigate to Reset password link in my email")
+    /*@And("I navigate to Reset password link in my email")
     public void iNavigateToResetPasswordLinkInMyEmail() throws MalformedURLException {
+        //String emailUrl = "https://www.microsoft.com/en-us/microsoft-365/outlook/log-in";
+        BaseDefinition.getThreadLocal().get(emailUrl);
+
         //OutlookEmailAutomation automation = new OutlookEmailAutomation(baseDefinition, baseDefinition.getThreadLocal());
-        OutlookEmailAutomation automation = new OutlookEmailAutomation();
+        //OutlookEmailAutomation automation = new OutlookEmailAutomation();
         String userEmail = "yelyzaveta.postnova@testpro.io";
         String resetLink = automation.extractResetLinkFromEmail(userEmail);
         //BaseDefinition.navigateToResetLink(resetLink);
         automation.navigateToResetLink(resetLink);
-    }
+    }*/
 
     @And("I set new password")
     public void iSetNewPassword() {
@@ -114,4 +119,11 @@ public class LoginStepDefinitions {
         RegistrationPage registrationPage = new RegistrationPage(BaseDefinition.getThreadLocal());
         registrationPage.newPasswordSubmitBtn.click();
     }
+
+    /*@And("I open Reset Password page")
+    public void iOpenResetPasswordPage() {
+        // Assertion to check if resetPasswordUrl is not null
+        Assert.assertNotNull(resetPasswordUrl, "Reset password URL is null");
+        BaseDefinition.getThreadLocal().get(resetPasswordUrl);
+    }*/
 }
