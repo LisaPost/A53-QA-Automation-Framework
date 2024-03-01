@@ -15,7 +15,7 @@ import java.sql.Statement;
 
 public class LoginStepDefinitions {
     String BaseUrl = "https://qa.koel.app/";
-    private BaseDefinition baseDefinition;
+    //private BaseDefinition baseDefinition;
     @Given("I open Login page")
     public void openLoginPage() {
         BaseDefinition.getThreadLocal().get(BaseUrl);
