@@ -1,21 +1,35 @@
 package stepDefinitions;
 
+import org.openqa.selenium.WebDriver;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.search.FromTerm;
 import java.net.MalformedURLException;
 import java.util.Properties;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class OutlookEmailAutomation {
     private BaseDefinition baseDefinition;
-    public OutlookEmailAutomation() {
-        baseDefinition = new BaseDefinition();
+    // last change:
+    private WebDriver driver;
+    // BaseDefinition baseDefinition, WebDriver driver added
+    public OutlookEmailAutomation(BaseDefinition baseDefinition, WebDriver driver) {
+        //baseDefinition = new BaseDefinition();
+        this.baseDefinition = baseDefinition;
+        this.driver = driver;
     }
     public void navigateToResetLink(String resetLink) throws MalformedURLException {
         baseDefinition.threadLocal.set(baseDefinition.pickBrowser(System.getProperty("browser")));
-        baseDefinition.getThreadLocal().get(resetLink);
+        if (resetLink != null) {
+            baseDefinition.getThreadLocal().get(resetLink);
+            switchToNewTabOrWindow();
+        } else {
+            System.err.println("Reset link is null. Cannot navigate");
+        }
+
     }
     public static String extractResetLinkFromEmail(String userEmail) {
         try {
@@ -74,5 +88,11 @@ public class OutlookEmailAutomation {
             return matcher.group();
         }
         return null;
+    }
+    private void switchToNewTabOrWindow() {
+        Set<String> windowHandles = baseDefinition.getThreadLocal().getWindowHandles();
+        for (String windowHandle : windowHandles) {
+            baseDefinition.getThreadLocal().switchTo().window(windowHandle);
+        }
     }
 }

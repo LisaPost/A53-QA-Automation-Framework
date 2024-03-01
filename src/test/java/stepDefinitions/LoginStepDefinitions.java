@@ -15,6 +15,7 @@ import java.sql.Statement;
 
 public class LoginStepDefinitions {
     String BaseUrl = "https://qa.koel.app/";
+    private BaseDefinition baseDefinition;
     @Given("I open Login page")
     public void openLoginPage() {
         BaseDefinition.getThreadLocal().get(BaseUrl);
@@ -91,7 +92,7 @@ public class LoginStepDefinitions {
 
     @And("I navigate to Reset password link in my email")
     public void iNavigateToResetPasswordLinkInMyEmail() throws MalformedURLException {
-        OutlookEmailAutomation automation = new OutlookEmailAutomation();
+        OutlookEmailAutomation automation = new OutlookEmailAutomation(baseDefinition, baseDefinition.getThreadLocal());
         String userEmail = "yelyzaveta.postnova@testpro.io";
         String resetLink = automation.extractResetLinkFromEmail(userEmail);
         //BaseDefinition.navigateToResetLink(resetLink);

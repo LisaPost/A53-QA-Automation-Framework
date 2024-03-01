@@ -23,12 +23,14 @@ public class BaseDefinition {
     protected static final ThreadLocal<WebDriver> threadLocal = new ThreadLocal<>();
     private WebDriver driver = null;
     private final int timeSeconds = 10;
+    private BaseDefinition baseDefinition;
 
     public static WebDriver getThreadLocal() {
         return threadLocal.get();
     }
     @Before
     public void setUpBrowser() throws MalformedURLException {
+        baseDefinition = new BaseDefinition();
         DatabaseUtils.updateUserEmail(29127, "yelyzaveta.postnova@testpro.io");
         threadLocal.set(pickBrowser(System.getProperty("browser")));
         threadLocal.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(timeSeconds));
