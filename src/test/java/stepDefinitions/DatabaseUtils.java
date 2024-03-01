@@ -6,6 +6,15 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DatabaseUtils {
+    static {
+        try {
+            Class.forName("org.mariadb.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            System.err.println("Failed to load MariaDB JDBC driver: " + e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException("Failed to load MariaDB JDBC driver", e);
+        }
+    }
     public static void updateUserEmail(int userId, String newEmail) {
         Connection connection = null;
         String databaseUrl = "jdbc:mariadb://104.237.13.60:3306/dbkoel";
