@@ -23,7 +23,7 @@ public class BasePage {
     public WebElement findElement(By locator) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
-    protected WebElement waitElement(WebElement webElement) {
+    protected WebElement waitElementToBeVisible(WebElement webElement) {
         wait.until(ExpectedConditions.visibilityOf(webElement));
         return webElement;
     }
