@@ -51,4 +51,16 @@ public class LoginStepDefinitions {
                 .providePassword(password)
                 .clickSubmit();
     }
+
+    @Then("I should be redirected to Home page")
+    public void userShouldBeRedirectedToHomePage() {
+        String homePageUrl = "https://qa.koel.app/#!/home";
+        Assert.assertEquals(BaseDefinition.getThreadLocal().getCurrentUrl(), homePageUrl);
+    }
+
+    @Then("I should see login error")
+    public void userShouldSeeLoginError() {
+        LoginPage loginPage = new LoginPage(BaseDefinition.getThreadLocal());
+        Assert.assertTrue(loginPage.showLoginError().isDisplayed());
+    }
 }

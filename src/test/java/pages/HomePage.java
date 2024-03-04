@@ -39,8 +39,8 @@ public class HomePage extends BasePage {
     public WebElement playlistForSongInDropdown;
     @FindBy(xpath = "//section[@id='songResultsWrapper']//li[contains(@class,'playlist') and contains(text(),\"Playlist with song to Delete\")]")
     public WebElement playlistFromDropdown;
-    @FindBy(xpath = "//a[@class='logout control']")
-    WebElement logoutBtn;
+    /*@FindBy(xpath = "//a[@class='logout control']")
+    WebElement logoutBtn;*/
     @FindBy(css = "a.view-profile>span")
     public WebElement actualProfileName;
     //@FindBy(xpath = "//section[@id='playlists']//a[contains(text(),'\" + playlistName + \"')]")
@@ -60,6 +60,8 @@ public class HomePage extends BasePage {
     public WebElement selectRenamedPlaylistToDelete;
     @FindBy(xpath = "//section[@id='playlists']//a[contains(text(),\"Playlist with Song\")]")
     public WebElement selectAddSongPlaylistToDelete;*/
+    @FindBy(xpath = "//i[@class='fa fa-sign-out']")
+    public WebElement logoutBtn;
 
     public WebElement getUserAvatar() {return userAvatarIcon;}
 

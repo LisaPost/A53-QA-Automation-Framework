@@ -18,6 +18,10 @@ public class LoginPage extends BasePage{
     WebElement submitBtn;
     @FindBy(xpath = "//a[@href='registration']")
     public WebElement regLink;
+    @FindBy(xpath = "//div[@class='login-wrapper']//form[@class='error']")
+    public WebElement loginError;
+    @FindBy(xpath = "//form[@data-testid='login-form']")
+    public WebElement loginForm;
     public LoginPage provideEmail(String username) {
         emailField.sendKeys(username);
         return this;
@@ -37,5 +41,8 @@ public class LoginPage extends BasePage{
         providePassword(password);
         clickSubmit();
         return this;
+    }
+    public WebElement showLoginError() {
+        return loginError;
     }
 }
